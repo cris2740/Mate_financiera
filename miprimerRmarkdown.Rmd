@@ -1,0 +1,60 @@
+---
+title: "mi primer Rmarkdown"
+author: "cristina calderon"
+date: "`r Sys.Date()`"
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(DT)
+```
+
+# Introduccion 
+
+En este archivo aprendemos como utilizar Rmarkdown para compilar paginas web o documentos. 
+
+## Ejemplo de codigo 1
+
+vamos a estimar una aproximacion del numero $e$ con la siguiente expresion:
+
+$$e\approx \lim_{n\rightarrow\infty} VA\cdot\left(1+\frac{1}{n}\right)^n$$
+
+este texto **va en negritas** y en *italica*.
+
+este es un ejemplo de [vinculo GOOGLE](https://.google.com)
+
+##Aproximacion del numero $e$ de forma numerica 
+
+En el siguiente fragmento, se aproxima el numero $e$ con 1 a 100,000 periodo de recomposicion ($n$) en 1 año de un prestamo de un peso al 100\% anualizado 
+
+```{r tabla1}
+#creamos el objeto con un valor de 1: 
+VA=1
+#tasa actualizada de rendimiento
+i=1
+#periodos de recomposicion deseados: 
+nTotal=1000
+t=1:nTotal
+#tabla de saslida
+tablanumeroe=data.frame(
+                        t=t,
+                        VF=VA*((1+(i/t))^t)
+                        )
+datatable(tablanumeroe)
+
+
+```
+el siguiente codigo no se vera pero si el resultado de los calculos o graficas generados en el mismo:
+
+```{r figura1, echo=FALSE}
+# Ahora grafico los valores de la tabla del numero e:
+
+plot(x=tablanumeroe$t,y=tablanumeroe$VF,type="l",
+    col="blue")
+
+```
+
+
